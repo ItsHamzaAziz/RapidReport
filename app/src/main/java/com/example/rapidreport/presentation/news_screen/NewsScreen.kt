@@ -60,7 +60,7 @@ fun NewsScreen(
     val coroutineScope = rememberCoroutineScope()
 
     val categories = listOf(
-        "General", "Business", "Health", "Science", "Sports", "Technology", "Entertainment"
+        "General", "Business", "Science", "Sports",
     )
 
     val focusRequester = remember { FocusRequester() }
