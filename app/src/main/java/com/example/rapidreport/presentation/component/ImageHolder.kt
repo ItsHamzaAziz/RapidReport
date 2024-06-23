@@ -23,15 +23,15 @@ fun ImageHolder(
         model = ImageRequest
             .Builder(LocalContext.current)
             .data(imageUrl)
-            .crossfade(true)
+            .crossfade(true)        // When image does from placeholder to actual image then cross fade transition will occur
             .build(),
         contentDescription = "Image",
         contentScale = ContentScale.Crop,
         modifier = modifier
-            .clip(RoundedCornerShape(4.dp))
+            .clip(RoundedCornerShape(2.dp))
             .fillMaxWidth()
             .aspectRatio(16 / 9f),
-        placeholder = painterResource(R.drawable.placeholder_loading),
-        error = painterResource(R.drawable.placeholder_news)
+        placeholder = painterResource(R.drawable.loading_image),
+        error = painterResource(R.drawable.resource_default)
     )
 }

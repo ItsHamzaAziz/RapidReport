@@ -16,11 +16,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+// When app is in dark mode
 private val DarkColorScheme = darkColorScheme(
     primaryContainer = Color.Black,
     onPrimaryContainer = Color.White
 )
 
+// When app is in light mode
 private val LightColorScheme = lightColorScheme(
     primaryContainer = RoyalBlue,
     onPrimaryContainer = Color.White

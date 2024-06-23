@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.rapidreport.domain.model.Article
@@ -24,17 +26,20 @@ fun NewsArticleCard(
     article: Article,
     onCardClicked: (Article) -> Unit
 ) {
+    // Data by default is in "2024-06-22T08:31:31Z" format
+    // dateFormatter formats it in better or readable format
     val date = dateFormatter(article.publishedAt)
     Card(
-        modifier = modifier.clickable { onCardClicked(article) }
+        modifier = modifier.clickable { onCardClicked(article) },
+        shape = RoundedCornerShape(4.dp),
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Column(modifier = Modifier.padding(10.dp)) {
             ImageHolder(imageUrl = article.urlToImage)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(7.dp))
             Text(
                 text = article.title,
                 style = MaterialTheme.typography.titleMedium,
-                maxLines = 1,
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(8.dp))

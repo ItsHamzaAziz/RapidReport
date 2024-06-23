@@ -11,7 +11,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.example.rapidreport.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -21,7 +23,12 @@ fun NewsScreenTopBar(
 ) {
     TopAppBar(
         scrollBehavior = scrollBehavior,
-        title = { Text(text = "Newsroom", fontWeight = FontWeight.Bold)},
+        title = {
+            Text(
+                text = stringResource(id = R.string.app_name),
+                fontWeight = FontWeight.Bold
+            )
+        },
         actions = {
             IconButton(onClick = onSearchIconClicked) {
                 Icon(imageVector = Icons.Default.Search, contentDescription = "Search")

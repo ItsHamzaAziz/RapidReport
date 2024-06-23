@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+// In case if there was an error while fetching news then we will use this to retry and fetch the news
 @Composable
 fun RetryContent(
     error: String,

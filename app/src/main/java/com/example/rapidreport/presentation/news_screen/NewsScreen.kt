@@ -55,10 +55,14 @@ fun NewsScreen(
     onEvent: (NewsScreenEvent) -> Unit,
     onReadFullStoryButtonClick: (String) -> Unit
 ) {
+    // The scroll behavior is
+    // When the user scrolls down the content, the top app bar scrolls up and off the screen along with the content.
+    // As soon as the user starts scrolling up, the top app bar reappears immediately, regardless of how far the user has scrolled.
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
+    // Here we will take only these categories
     val categories = listOf(
         "General", "Business", "Science", "Sports",
     )
@@ -67,6 +71,7 @@ fun NewsScreen(
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
+    // Whenever a category is selected from the top bar, then news of that category is shown only
     LaunchedEffect(key1 = pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
             onEvent(NewsScreenEvent.OnCategoryChanged(category = categories[page]))
@@ -82,6 +87,7 @@ fun NewsScreen(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var shouldBottomSheetShow by remember { mutableStateOf(false) }
 
+    // When user clicks on a news then Modal Bottom Sheet will show up with the
     if (shouldBottomSheetShow) {
         ModalBottomSheet(
             onDismissRequest = { shouldBottomSheetShow = false },
@@ -135,6 +141,7 @@ fun NewsScreen(
                 Scaffold(
                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                     topBar = {
+                        // Using the top bar which we created earlier
                         NewsScreenTopBar(
                             scrollBehavior = scrollBehavior,
                             onSearchIconClicked = {
@@ -190,8 +197,8 @@ fun NewsArticleList(
     onRetry: () -> Unit,
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(10.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(state.articles) { article ->
             NewsArticleCard(

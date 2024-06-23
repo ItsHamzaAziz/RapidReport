@@ -40,7 +40,12 @@ fun ArticleScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Article", fontWeight = FontWeight.Bold) },
+                title = {
+                    Text(
+                        text = "Complete News",
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBackPressed) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")

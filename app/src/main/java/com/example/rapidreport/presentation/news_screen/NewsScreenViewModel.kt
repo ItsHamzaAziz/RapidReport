@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
+@HiltViewModel      // Now it will knew that it is our view model and it will create an object itself
 class NewsScreenViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : ViewModel() {
@@ -22,17 +22,21 @@ class NewsScreenViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
+
     fun onEvent(event: NewsScreenEvent) {
         when (event) {
+            // When user clicks on a category
             is NewsScreenEvent.OnCategoryChanged -> {
                 state = state.copy(category = event.category)
                 getNewsArticles(category = state.category)
             }
 
+            // When user clicks on a news card
             is NewsScreenEvent.OnNewsCardClicked -> {
                 state = state.copy(selectedArticle = event.article)
             }
 
+            // When user clicks on the search icon to search for a news
             NewsScreenEvent.OnSearchIconClicked -> {
                 state = state.copy(
                     isSearchBarVisible = true,
@@ -40,11 +44,14 @@ class NewsScreenViewModel @Inject constructor(
                 )
             }
 
+            // When user clicks on the close icon to close the search bar
             NewsScreenEvent.OnCloseIconClicked -> {
                 state = state.copy(isSearchBarVisible = false)
+                // Only take articles of particular category as user chose that particular category
                 getNewsArticles(category = state.category)
             }
 
+            // When user types in the search bar
             is NewsScreenEvent.OnSearchQueryChanged -> {
                 state = state.copy(searchQuery = event.searchQuery)
                 searchJob?.cancel()
@@ -58,21 +65,23 @@ class NewsScreenViewModel @Inject constructor(
 
     private fun getNewsArticles(category: String) {
         viewModelScope.launch {
-            state = state.copy(isLoading = true)
+            state = state.copy(isLoading = true)        // Show loading indicator when news are being fetched
             val result = newsRepository.getTopHeadlines(category = category)
             when (result) {
+                // When the data was fetched successfully
                 is Resource.Success -> {
                     state = state.copy(
                         articles = result.data ?: emptyList(),
-                        isLoading = false,
+                        isLoading = false,              // Don't show loading indicator fetch is completed
                         error = null
                     )
                 }
 
+                // If there was any error while fetching data
                 is Resource.Error -> {
                     state = state.copy(
-                        articles = emptyList(),
-                        isLoading = false,
+                        articles = emptyList(),         // If there was any error do not show any news
+                        isLoading = false,             // Don't show loading indicator when an error occurred
                         error = result.message
                     )
                 }

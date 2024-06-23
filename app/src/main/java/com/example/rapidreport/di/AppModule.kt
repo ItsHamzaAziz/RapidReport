@@ -17,11 +17,12 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
-    @Singleton
+    @Singleton      // This means that it should create a single object for whole application, not separate objects everytime
     fun provideNewsApi(): NewsApi {
+        // This is our retrofit object
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())     // GsonConverterFactory helps to convert Json data to our Kotlin file
             .build()
         return retrofit.create(NewsApi::class.java)
     }

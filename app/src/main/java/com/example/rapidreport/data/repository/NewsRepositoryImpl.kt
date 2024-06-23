@@ -11,9 +11,12 @@ class NewsRepositoryImpl(
 
     override suspend fun getTopHeadlines(category: String): Resource<List<Article>> {
         return try {
+            // Taking news of categories we will provide
             val response = newsApi.getBreakingNews(category = category)
+            // If everything goes fine then set data in resource to response
             Resource.Success(data = response.articles)
         } catch (e: Exception) {
+            // In case there was an error, set the message to display the error
             Resource.Error(message = "Failed to fetch news ${e.message}")
         }
     }

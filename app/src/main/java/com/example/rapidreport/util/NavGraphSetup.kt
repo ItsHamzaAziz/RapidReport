@@ -26,12 +26,14 @@ fun NavGraphSetup(
             NewsScreen(
                 state = viewModel.state,
                 onEvent = viewModel::onEvent,
+                // Giving url for the specific news
                 onReadFullStoryButtonClick = { url ->
                     navController.navigate("article_screen?$argKey=$url")
                 }
             )
         }
         composable(
+            // Giving arguments
             route = "article_screen?$argKey={$argKey}",
             arguments = listOf(navArgument(name = argKey) {
                 type = NavType.StringType

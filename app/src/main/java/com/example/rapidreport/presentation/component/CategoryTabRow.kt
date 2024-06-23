@@ -20,13 +20,14 @@ fun CategoryTabRow(
 ) {
     ScrollableTabRow(
         selectedTabIndex = pagerState.currentPage,
-        edgePadding = 0.dp,
+        edgePadding = 3.dp,
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
         categories.forEachIndexed { index, category ->
             Tab(
                 selected = pagerState.currentPage == index,
+                // Change the category whenever user clicks on one
                 onClick = { onTabSelected(index) },
                 content = {
                     Text(
