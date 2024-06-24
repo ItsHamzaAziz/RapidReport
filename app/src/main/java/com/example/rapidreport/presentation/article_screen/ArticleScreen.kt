@@ -24,8 +24,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.rapidreport.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +44,7 @@ fun ArticleScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Complete News",
+                        text = stringResource(id = R.string.complete_news),
                         fontWeight = FontWeight.Bold
                     )
                 },
