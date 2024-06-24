@@ -36,11 +36,13 @@ fun SearchAppBar(
             Icon(
                 imageVector = Icons.Filled.Search,
                 contentDescription = "Search Icon",
-                tint = Color.White.copy(alpha = 0.7f)
             )
         },
         placeholder = {
-            Text(text = "Search...", color = Color.White.copy(alpha = 0.7f))
+            Text(
+                text = "Search...",
+                color = Color.White.copy(alpha = 0.7f)
+            )
         },
         trailingIcon = {
             IconButton(onClick = {
@@ -54,8 +56,10 @@ fun SearchAppBar(
                 )
             }
         },
+        // Using ImeAction.Search so that we can have search functionality in keyboard
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = { onSearchClicked() }),
+        // The colors for our text field
         colors = TextFieldDefaults.colors(
             focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
             unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,

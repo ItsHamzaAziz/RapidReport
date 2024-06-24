@@ -112,6 +112,7 @@ fun NewsScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         Crossfade(targetState = state.isSearchBarVisible) { isVisible ->
+            // If user is using search bar
             if (isVisible) {
                 Column {
                     SearchAppBar(
@@ -137,6 +138,7 @@ fun NewsScreen(
                         }
                     )
                 }
+            // If user is not using search bar then show them simple screen with news
             } else {
                 Scaffold(
                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

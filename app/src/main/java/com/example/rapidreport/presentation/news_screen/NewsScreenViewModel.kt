@@ -89,12 +89,14 @@ class NewsScreenViewModel @Inject constructor(
         }
     }
 
+    // When user is using seqarch news functionality
     private fun searchForNews(query: String) {
         if (query.isEmpty()) {
             return
         }
         viewModelScope.launch {
             state = state.copy(isLoading = true)
+            // Search by query or the name the user enters (match that with data)
             val result = newsRepository.searchForNews(query = query)
             when (result) {
                 is Resource.Success -> {

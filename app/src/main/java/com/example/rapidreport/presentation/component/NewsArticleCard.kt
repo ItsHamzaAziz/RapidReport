@@ -27,7 +27,7 @@ fun NewsArticleCard(
     onCardClicked: (Article) -> Unit
 ) {
     // Data by default is in "2024-06-22T08:31:31Z" format
-    // dateFormatter formats it in better or readable format
+    // dateFormatter formats it in better or readable format (we created this function)
     val date = dateFormatter(article.publishedAt)
     Card(
         modifier = modifier.clickable { onCardClicked(article) },
